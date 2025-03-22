@@ -22,7 +22,6 @@ function DashboardPage() {
             <p className="text-md text-gray-600">Input founder details below</p>
             <FounderForm />
             {/*  <p>Your ID is {user?.user_id}</p> */}
-
         </div>
     );
 }

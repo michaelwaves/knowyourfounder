@@ -27,10 +27,13 @@ email TEXT,
 phone VARCHAR(50),
 
 --founders supply this info
+linkedin_url TEXT,
+github_url TEXT,
 date_of_birth TEXT,
 nationality TEXT,
 address TEXT,
 company_id BIGINT REFERENCES companies(id),
+company_name TEXT,
 is_pep BOOLEAN,
 is_sanctioned BOOLEAN,
 
@@ -38,6 +41,9 @@ is_sanctioned BOOLEAN,
 risk_score INT,
 recommendation TEXT,
 next_review_date TIMESTAMP,
+tavus_url TEXT,
+portal_url TEXT,
+tavus_conversation_id TEXT,
 
 --status of case
 status TEXT,

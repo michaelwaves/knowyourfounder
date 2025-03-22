@@ -15,7 +15,7 @@ const createOne = async (tableName: string, data: any) => {
 }
 
 const selectOne = async (tableName: string, id: string) => {
-    const res = await db.oneOrNone(`SELECT FROM $1 WHERE id=$2`, [tableName, id])
+    const res = await db.oneOrNone(`SELECT * FROM ${tableName} WHERE id=$1`, [id])
     return res
 }
 
