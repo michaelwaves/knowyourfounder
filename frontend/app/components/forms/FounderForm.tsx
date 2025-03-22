@@ -14,8 +14,8 @@ function FounderForm() {
         defaultValues: {
             first_name: "",
             last_name: "",
-            linkedin_url: "",
-            company_name: ""
+            email: "",
+            phone: ""
         }
     });
 
@@ -29,14 +29,14 @@ function FounderForm() {
                 created_by: user?.user_id,
                 organization_id: user?.user_id,
             }
-            const { id } = await createOne('founders', fullData)
-            /* await sendClientPortalEmail(
+            await createOne('founders', fullData)
+            await sendClientPortalEmail(
                 data.email,
                 `Hello ${data.first_name}, Complete Know Your Founder Check Today`,
                 data.first_name,
-                `http://localhost:3000/dashboard/portal/${user?.user_id}/${id}`
-            ) */
-            toast("Successfully created founder")
+                'http://localhost:3000'
+            )
+            toast("Successfully created founder and sent email")
         } catch (e) {
             console.error(e)
             toast("Error creating founder")
@@ -60,18 +60,18 @@ function FounderForm() {
             {errors.last_name && <p className="text-red-500 text-sm">{errors.last_name.message}</p>}
 
             <Input
-                placeholder="Founder's LinkedIn"
-                type="text"
-                {...register("linkedin_url", { required: "LinkedIn is required" })}
+                placeholder="Founder's Email"
+                type="email"
+                {...register("email", { required: "Email is required" })}
             />
-            {errors.linkedin_url && <p className="text-red-500 text-sm">{errors.linkedin_url.message}</p>}
+            {errors.email && <p className="text-red-500 text-sm">{errors.email.message}</p>}
 
             <Input
-                placeholder="Founder's Company"
-                type="text"
-                {...register("company_name", { required: "Company Name is required" })}
+                placeholder="Phone"
+                type="phone"
+                {...register("phone", { required: "Phone number is required" })}
             />
-            {errors.company_name && <p className="text-red-500 text-sm">{errors.company_name.message}</p>}
+            {errors.phone && <p className="text-red-500 text-sm">{errors.phone.message}</p>}
 
             <Button disabled={isSubmitting} type="submit" className="w-full">
                 {isSubmitting ? <Loader className="animate-spin" /> : "Submit"}
