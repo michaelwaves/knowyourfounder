@@ -1,20 +1,43 @@
-'use client';
+"use client"
 
-import { useEffect } from 'react';
-import { useRouter } from 'next/navigation';
-import { useStytchMember } from '@stytch/nextjs/b2b';
-import Authenticate from './components/Authenticate';
+import { useStytch, useStytchUser } from "@stytch/nextjs";
+import { useRouter, useSearchParams } from "next/navigation";
+import { useEffect } from "react";
+import Login from "./components/Login";
 
-export default function AuthenticatePage() {
-  const { member, isInitialized } = useStytchMember();
+const MAGIC_LINKS_TOKEN = "magic_links"
+
+export default function Home() {
+  const { user, isInitialized } = useStytchUser();
+  const stytch = useStytch();
   const router = useRouter();
+  const searchParams = useSearchParams();
 
-  // If the Stytch SDK no longer has a User then redirect to login; for example after logging out.
   useEffect(() => {
-    if (isInitialized && member) {
-      router.replace('/dashboard');
-    }
-  }, [member, isInitialized, router]);
+    if (stytch && !user && isInitialized) {
+      const token = searchParams.get("token");
+      const stytch_token_type = searchParams.get("stytch_token_type");
 
-  return <Authenticate />;
+      if (token && stytch_token_type === MAGIC_LINKS_TOKEN) {
+        stytch.magicLinks.authenticate(token, {
+          session_duration_minutes: 60,
+        });
+      }
+    }
+  }, [isInitialized, router, searchParams, stytch, user]);
+
+  useEffect(() => {
+    if (!isInitialized) {
+      return;
+    }
+    if (user) {
+      router.replace("/dashboard");
+    }
+  }, [router, user, isInitialized]);
+
+  return (
+    <div>
+      <Login />
+    </div>
+  );
 }

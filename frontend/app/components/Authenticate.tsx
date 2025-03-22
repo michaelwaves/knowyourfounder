@@ -1,48 +1,49 @@
-'use client';
+"use client";
 
-import { useStytchMemberSession } from '@stytch/nextjs/b2b';
-import { useRouter, useSearchParams } from 'next/navigation';
-import { StytchB2B } from '@stytch/nextjs/b2b';
-import { discoveryConfig } from '@/lib/stytch/stytchConfig';
+import { useEffect } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
+import { useStytchUser, useStytch } from "@stytch/nextjs";
 
+const MAGIC_LINKS_TOKEN = "magic_links";
+
+/**
+ * During the Magic link flow, Stytch will redirect the user back to your application to a specified redirect URL (see Login.tsx).
+ * Stytch will append query parameters to the redirect URL which are then used to complete the authentication flow.
+ * A redirect URL for this example app will look something like: http://localhost:3000/authenticate?stytch_token_type=magic_links&token=abc123
+ *
+ * The AuthenticatePage will detect the presence of a token in the query parameters, and attempt to authenticate it.
+ *
+ * On successful authentication, a session will be created and the user will be redirect to /profile.
+ */
 const Authenticate = () => {
-    const { session } = useStytchMemberSession();
+    const { user, isInitialized } = useStytchUser();
+    const stytch = useStytch();
     const router = useRouter();
-    const searchParams = useSearchParams(); // Handle query parameters
+    const searchParams = useSearchParams();
 
-    const nextRoute = searchParams.get('next_route') || '/dashboard';
+    useEffect(() => {
+        if (stytch && !user && isInitialized) {
+            const token = searchParams.get("token");
+            const stytch_token_type = searchParams.get("stytch_token_type");
 
-    // Redirect if the session exists
-    if (session) {
-        router.push(nextRoute);
-        return null; // Return nothing since redirection happens
-    }
+            if (token && stytch_token_type === MAGIC_LINKS_TOKEN) {
+                stytch.magicLinks.authenticate(token, {
+                    session_duration_minutes: 60,
+                });
+            }
+        }
+    }, [isInitialized, router, searchParams, stytch, user]);
 
-    // Preserve existing query parameters and add next_route if exists
-    const redirectParams = new URLSearchParams();
-    searchParams.forEach((value, key) => redirectParams.set(key, value)); // Preserve current query params
-    if (!redirectParams.has('next_route')) {
-        redirectParams.set('next_route', nextRoute);
-    }
+    useEffect(() => {
+        if (!isInitialized) {
+            return;
+        }
+        if (user) {
+            router.replace("/dashboard");
+        }
+    }, [router, user, isInitialized]);
 
-    const fullRedirectURL = `${window.location.origin}/authenticate?${redirectParams.toString()}`;
-    console.log(fullRedirectURL)
-    const configWithRedirect = {
-        ...discoveryConfig,
-        emailMagicLinksOptions: {
-            discoveryRedirectURL: fullRedirectURL,
-        },
-        oauthOptions: {
-            ...discoveryConfig.oauthOptions,
-            discoveryRedirectURL: fullRedirectURL,
-        },
-    };
-
-    return (
-        <div className="flex w-full h-full items-center justify-center">
-            <StytchB2B config={configWithRedirect} />
-        </div>
-    );
+    return null;
 };
 
-export default Authenticate
+export default Authenticate;

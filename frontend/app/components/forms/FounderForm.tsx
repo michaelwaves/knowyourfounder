@@ -3,13 +3,13 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { sendClientPortalEmail } from "@/lib/aws/ses/sendEmail";
 import { createOne } from "@/lib/postgres/tables/single";
-import { useStytchMember } from "@stytch/nextjs/b2b";
+import { useStytchUser } from "@stytch/nextjs";
 import { Check, Loader } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 
 function FounderForm() {
-    const { member } = useStytchMember()
+    const { user } = useStytchUser()
     const form = useForm({
         defaultValues: {
             first_name: "",
@@ -26,8 +26,8 @@ function FounderForm() {
             const fullData = {
                 ...data,
                 status: "email sent",
-                created_by: member?.member_id,
-                organization_id: member?.organization_id,
+                created_by: user?.user_id,
+                organization_id: user?.user_id,
             }
             await createOne('founders', fullData)
             await sendClientPortalEmail(
