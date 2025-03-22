@@ -18,7 +18,7 @@ async function FounderPage({ params }: { params: Promise<{ id: string }> }) {
     // Fallback if linkedInData is undefined
     const prompt = `
         Summarize the user's LinkedIn experience and trends based on the following details: 
-        ${linkedInData || 'No LinkedIn data available.'}
+        ${JSON.stringify(linkedInData, null, 2) || 'No LinkedIn data available.'}
         The goal is to summarize their professional journey and highlight any trends that may emerge from their experience, job history, or skillset.
     `;
     
@@ -28,13 +28,14 @@ async function FounderPage({ params }: { params: Promise<{ id: string }> }) {
     // Log the entire result to inspect its structure
     console.log(result);
     //const contentToRender = result.content;
+    const text = result?.response?.candidates?.[0]?.content?.parts?.[0]?.text || "No content generated.";
 
     return (
-        <div>
+        <div className="pt-4">
             <h1>Founder {id}</h1>
-            <pre>{JSON.stringify(linkedInData, null, 2)}</pre> {/* Display LinkedIn data */}
             <h2>Summary of Experiences</h2>
-            {/*<p>{contentToRender}</p>*/}
+            <p className="whitespace-normal break-words">{text}</p>
+            <pre>{JSON.stringify(linkedInData, null, 2)}</pre> {/* Display LinkedIn data */}
         </div>
     );
 }
