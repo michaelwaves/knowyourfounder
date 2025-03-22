@@ -54,22 +54,22 @@ function PortalForm({ id, investorId, founderData }: { id: string, investorId: s
                 <div className="grid gap-4">
                     <div>
                         <Label>First Name</Label>
-                        <Input {...register("first_name", { required: "First name is required" })} disabled />
+                        <Input {...register("first_name", { required: "First name is required" })} />
                     </div>
 
                     <div>
                         <Label>Last Name</Label>
-                        <Input {...register("last_name", { required: "Last name is required" })} disabled />
+                        <Input {...register("last_name", { required: "Last name is required" })} />
                     </div>
 
                     <div>
                         <Label>Email</Label>
-                        <Input type="email" {...register("email", { required: "Email is required" })} disabled />
+                        <Input type="email" {...register("email", { required: "Email is required" })} />
                     </div>
 
                     <div>
                         <Label>Phone</Label>
-                        <Input type="phone" {...register("phone", { required: "Phone number is required" })} disabled />
+                        <Input type="phone" {...register("phone", { required: "Phone number is required" })} />
                     </div>
                 </div>
             </div>
