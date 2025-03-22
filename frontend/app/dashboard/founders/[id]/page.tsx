@@ -39,9 +39,10 @@ ${references}
     // Log the entire result to inspect its structure
     console.log(result);
     //const contentToRender = result.content;
+    const text = result?.response?.candidates?.[0]?.content?.parts?.[0]?.text || "No content generated.";
 
     return (
-        <div>
+        <div className="pt-4">
             <h1>Founder {id}</h1>
             <h2>Summary of References</h2>
             {JSON.stringify(result)}

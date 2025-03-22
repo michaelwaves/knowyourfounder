@@ -130,7 +130,7 @@ function PortalForm({ id, investorId, founderData }: { id: string; investorId: s
 
             {/* 👥 Friends Field Array Section */}
             <div className="p-4 border-t">
-                <h3 className="text-lg font-semibold mb-2">Friends</h3>
+                <h3 className="text-lg font-semibold mb-2">Coworkers</h3>
                 {fields.map((friend, index) => (
                     <div key={friend.id} className="flex gap-4 mb-2">
                         <Input placeholder="Name" {...register(`friends.${index}.name`, { required: "Name is required" })} />
