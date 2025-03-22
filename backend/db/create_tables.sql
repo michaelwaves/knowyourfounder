@@ -68,5 +68,16 @@ organization_id TEXT
 );
 
 
+CREATE TABLE references (
+    id bigint PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
+    name TEXT,
+    email TEXT,
+    status TEXT,
+    founder_id BIGINT references founders(id),
+    tavus_conversation_id TEXT,
+    created_at TIMESTAMP DEFAULT NOW(),
+    organization_id TEXT,
+)
+
 
 

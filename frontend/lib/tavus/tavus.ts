@@ -13,8 +13,7 @@ export async function createConversation() {
         persona_id: "p5317866",
         callback_url: "https://kyc.info/webhook",
         conversation_name: "A Reference for a Founder",
-        conversational_context:
-            "",
+        conversational_context: "",
         custom_greeting: "Hey there!",
         properties: {
             max_call_duration: 60,
