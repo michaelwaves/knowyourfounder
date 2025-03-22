@@ -3,6 +3,7 @@
 import { Button } from "@/components/ui/button";
 import { updateOne } from "@/lib/postgres/tables/single";
 import { createConversation, endConversation, getTranscript } from "@/lib/tavus/tavus";
+import { Check } from "lucide-react";
 import { useState } from "react";
 import { toast } from "sonner";
 
@@ -61,21 +62,28 @@ function InterviewForm({ referenceId, id }: { referenceId: string, id: string })
         })
 
         console.log(updateFriendRes)
+        toast("Reference successfully submitted");
+
 
 
     }
     return (
-        <div>
-            <Button
-                onClick={handleStartConversation}
-            >Start Interview</Button>
-            {url && <Button variant="destructive"
-                onClick={handleEndConversation}
-            >End Call</Button>}
-            <Button
-                onClick={handleSubmitConversation}
-            >Submit Reference</Button>
-            {JSON.stringify(transcript)}
+        <div className="p-6 space-y-6">
+            <div className="flex flex-wrap items-center gap-4">
+                <Button onClick={handleStartConversation}>Start Interview</Button>
+                {url && (
+                    <Button variant="destructive" onClick={handleEndConversation}>
+                        End Call
+                    </Button>
+                )}
+                <Button onClick={handleSubmitConversation}>Submit Reference</Button>
+            </div>
+            {transcript && (
+                <div className="flex items-center gap-2">
+                    <Check className="w-5 h-5 text-green-500" />
+                    <span className="text-green-500 font-medium">Successfully submitted</span>
+                </div>
+            )}
         </div>
     );
 }

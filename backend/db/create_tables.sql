@@ -75,10 +75,7 @@ CREATE TABLE friends (
     status TEXT,
     founder_id BIGINT references founders(id),
     tavus_conversation_id TEXT,
-    tavus_transcript JSON,
+    tavus_transcript TEXT[],
     created_at TIMESTAMP DEFAULT NOW(),
     organization_id TEXT,
 )
-
-
-
