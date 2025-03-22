@@ -3,7 +3,7 @@ import Link from "next/link";
 import { HomeIcon, User } from "lucide-react";
 import Image from "next/image";
 import LogoutButton from "./LogoutButton";
-
+import kyf_logo from '@/app/kyf_logo.png'
 interface NavbarLinkProps {
     title: string,
     href: string,
@@ -46,15 +46,15 @@ function GlobalNavbar({ title, href, icon }: NavbarLinkProps) {
 function Navbar() {
     return (
         <div className="w-[20vw] min-h-screen h-full p-2 min-w-[200px] border-r-8 border-[#f7f4ed]">
-            {/* <div className="py-4 px-1 pt-5">
+            <div className="py-4 px-1 pt-5">
                 <Image
-                    src={LogoQ}
-                    alt="Quantoflow Logo"
-                    width={40}
-                    height={40}
+                    src={kyf_logo}
+                    alt="KYF Logo"
+                    width={140}
+                    height={120}
                     className=''
                 />
-            </div> */}
+            </div>
             <div className="w-full flex flex-col gap-2">
                 {links.map((link) => (<GlobalNavbar key={link.href} title={link.title} href={link.href}
                     icon={link.icon} />
