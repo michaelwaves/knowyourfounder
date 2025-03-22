@@ -1,7 +1,7 @@
 import { StytchLogin } from "@stytch/nextjs";
 import { Products } from "@stytch/vanilla-js";
 
-const REDIRECT_URL = 'http://localhost:3000/authenticate';
+const REDIRECT_URL = `{${process.env.NEXT_PUBLIC_FRONTEND_URL}}/authenticate`;
 function Login() {
     const styles = {
         container: {

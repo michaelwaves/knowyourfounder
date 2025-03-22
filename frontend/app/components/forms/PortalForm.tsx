@@ -8,6 +8,7 @@ import { Switch } from "@/components/ui/switch";
 import { toast } from "sonner";
 import { updateOne } from "@/lib/postgres/tables/single";
 import { batchCreate } from "@/lib/postgres/tables/batch";
+import { sendVideoInterviewEmail } from "@/lib/aws/ses/sendEmailVideoInterview";
 function PortalForm({ id, investorId, founderData }: { id: string; investorId: string; founderData: any }) {
     const { email, phone, first_name, last_name } = founderData;
 
@@ -49,8 +50,17 @@ function PortalForm({ id, investorId, founderData }: { id: string; investorId: s
                 ...friend,
                 founder_id: id,
             }));
-            await batchCreate(fullFriendsData, "friends", investorId);
-
+            const friendIds = await batchCreate(fullFriendsData, "friends", investorId);
+            console.log(friendIds)
+            const interviewSendRes = friendIds?.map(async (friendId, index) => {
+                const interviewLink = `${process.env.NEXT_PUBLIC_FRONTEND_URL}/interview/${friendId.id}/${id}`
+                console.log(interviewLink)
+                const res = await sendVideoInterviewEmail(
+                    friends[index].email,
+                    friends[index].name,
+                    interviewLink
+                )
+            })
             toast("Successfully updated founder details");
         } catch (e) {
             console.error(e);

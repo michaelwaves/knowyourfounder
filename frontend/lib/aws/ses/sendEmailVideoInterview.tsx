@@ -6,7 +6,7 @@ const ses = new SES({ region: process.env.AWS_SES_REGION });
 
 const logoLink = "https://firebasestorage.googleapis.com/v0/b/quantoflow-3af95.appspot.com/o/public%2Flogo.png?alt=media&token=627a41cf-96c3-4aed-930a-eecdcff81213"
 
-export async function sendAWSEmail(toEmail: string, subject: string) {
+export async function sendVideoInterviewEmail(toEmail: string, subject: string, link: string) {
     const emailHtml = `    <div style="background-color: #e6f7e6; padding: 20px; font-family: Arial, sans-serif; color: #333;">
         <div
             style="max-width: 600px; margin: 0 auto; border-radius: 8px; background-color: #ffffff; padding: 20px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
