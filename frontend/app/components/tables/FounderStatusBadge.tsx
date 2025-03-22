@@ -1,10 +1,10 @@
 import { Badge } from "@/components/ui/badge";
 
 const statusColors: Record<string, string> = {
-    "email sent": "bg-blue-500 text-white",
-    "form completed": "bg-yellow-500 text-white",
-    interviewed: "bg-purple-500 text-white",
-    completed: "bg-green-500 text-white",
+    "email sent": "bg-[#3b489e] text-white",
+    "form completed": "bg-[#9bb4dd] text-black",
+    interviewed: "bg-zinc-500 text-white",
+    completed: "bg-zinc-800 text-white",
 };
 
 const FounderStatusBadge = ({ status }: { status: string }) => {
