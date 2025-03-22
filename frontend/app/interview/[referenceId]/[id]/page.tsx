@@ -5,9 +5,9 @@ async function PortalPage({ params }: { params: Promise<{ id: string, referenceI
     const { id, referenceId } = await params
     const founderData = await selectOne("founders", id)
     return (
-        <div>
-            <h1>Hello Friend of {founderData.first_name}</h1>
-            <p>Tell us what it was like working with {founderData.first_name}</p>
+        <div className="flex flex-col p-6 gap-y-6">
+            <h1 className="text-3xl font-semibold">Hello Friend of {founderData.first_name}</h1>
+            <p className="text-lg text-gray-600">Tell us what it was like working with {founderData.first_name}</p>
             <InterviewForm referenceId={referenceId} id={id} />
         </div>
     );
