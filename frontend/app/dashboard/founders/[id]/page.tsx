@@ -3,7 +3,6 @@ import { getFriendsFromFounder } from "@/lib/postgres/tables/friends";
 import { selectOne } from "@/lib/postgres/tables/single";
 import { GoogleGenerativeAI } from "@google/generative-ai";
 import RenderReferences from "./RenderReferences";
-import { useState } from "react";
 
 const apikey = process.env.GEMINI_API_KEY;
 const genAI = new GoogleGenerativeAI("AIzaSyC_Xwd5nEpWvjAFjxuRQh07r71kTflyl_o");
@@ -27,10 +26,11 @@ async function FounderPage({ params }: { params: Promise<{ id: string }> }) {
          The goal is to summarize their professional journey and highlight any trends that may emerge from their experience, job history, or skillset.
      `; */
 
+    console.log(references)
     const promptReferences = `
     Summarize the user's References from friends based on the following transcripts and identify any red flags or positive qualities,
-    in the context of helping an investor decide whether or not to invest
-${references}
+    in the context of helping an investor decide whether or not to invest:
+${JSON.stringify(references)}
     `
 
     // Generate content based on the prompt
@@ -46,7 +46,7 @@ ${references}
             <h1>Founder {id}</h1>
             <h2>Summary of References</h2>
             {JSON.stringify(result)}
-            <RenderReferences references={references} />
+            {/* <RenderReferences references={references} /> */}
         </div>
     );
 }
