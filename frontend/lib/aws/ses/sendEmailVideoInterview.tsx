@@ -57,7 +57,7 @@ export async function sendClientPortalEmail(toEmail: string, subject: string, na
       style="max-width: 600px; margin: 0 auto; border-radius: 8px; background-color: #ffffff; padding: 20px; text-align: center; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
       <img src="${logoLink}" alt="Quantoflow Logo"
           style="width: 150px; margin-bottom: 20px;" />
-      <h2 style="color: #333; font-size: 24px; font-weight: bold;">Welcome to Quantoflow</h2>
+      <h2 style="color: #333; font-size: 24px; font-weight: bold;">Welcome to Know Your Founder</h2>
       <p style="font-size: 16px; line-height: 1.6; color: #666;">Hello ${name},</p>
       <p style="font-size: 16px; line-height: 1.6; color: #666;">
       We have created a client portal to collect information about your business to fulfill new regulatory requirements
