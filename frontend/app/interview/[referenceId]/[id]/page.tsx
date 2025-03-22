@@ -1,3 +1,4 @@
+import InterviewForm from "@/app/components/forms/InterviewForm";
 import { selectOne } from "@/lib/postgres/tables/single";
 
 async function PortalPage({ params }: { params: Promise<{ id: string, referenceId: string }> }) {
@@ -7,6 +8,7 @@ async function PortalPage({ params }: { params: Promise<{ id: string, referenceI
         <div>
             <h1>Hello Friend of {founderData.first_name}</h1>
             <p>Tell us what it was like working with {founderData.first_name}</p>
+            <InterviewForm referenceId={referenceId} id={id} />
         </div>
     );
 }
