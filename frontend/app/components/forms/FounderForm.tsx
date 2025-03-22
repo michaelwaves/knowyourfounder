@@ -29,12 +29,12 @@ function FounderForm() {
                 created_by: user?.user_id,
                 organization_id: user?.user_id,
             }
-            await createOne('founders', fullData)
+            const { id } = await createOne('founders', fullData)
             await sendClientPortalEmail(
                 data.email,
                 `Hello ${data.first_name}, Complete Know Your Founder Check Today`,
                 data.first_name,
-                'http://localhost:3000'
+                `http://localhost:3000/dashboard/portal/${user?.user_id}/${id}`
             )
             toast("Successfully created founder and sent email")
         } catch (e) {
