@@ -12,7 +12,7 @@ const batchCreate = async (data: any[], tableName: string, userId: string) => {
 
     const fullData = data.map(d => {
         return {
-            ...data,
+            ...d,
             organization_id: userId,
             created_by: userId,
         }

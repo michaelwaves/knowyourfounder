@@ -34,7 +34,7 @@ function FounderForm() {
                 data.email,
                 `Hello ${data.first_name}, Complete Know Your Founder Check Today`,
                 data.first_name,
-                `http://localhost:3000/dashboard/portal/${user?.user_id}/${id}`
+                `http://localhost:3000/portal/${user?.user_id}/${id}`
             )
             toast("Successfully created founder and sent email")
         } catch (e) {
