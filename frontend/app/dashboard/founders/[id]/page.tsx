@@ -1,8 +1,8 @@
-import { fetchLinkedInProfile } from "@/lib/linkedIn/linkedIn";
 import { getFriendsFromFounder } from "@/lib/postgres/tables/friends";
 import { selectOne } from "@/lib/postgres/tables/single";
 import { GoogleGenerativeAI } from "@google/generative-ai";
 import RenderReferences from "./RenderReferences";
+import FounderCard from "./FounderCard";
 
 const apikey = process.env.GEMINI_API_KEY;
 const genAI = new GoogleGenerativeAI("AIzaSyC_Xwd5nEpWvjAFjxuRQh07r71kTflyl_o");
@@ -40,13 +40,14 @@ ${JSON.stringify(references)}
     console.log(result);
     //const contentToRender = result.content;
     const text = result?.response?.candidates?.[0]?.content?.parts?.[0]?.text || "No content generated.";
-
+    console.log(text)
     return (
-        <div className="pt-4">
-            <h1>Founder {id}</h1>
-            <h2>Summary of References</h2>
-            {JSON.stringify(result)}
+        <div className="p-6 flex flex-col gap-6">
+            <h1 className="text-3xl font-semibold">Founder {founderData.first_name}</h1>
+            <h2 className="text-xl">Summary of References</h2>
+            <p className="text-lg text-gray-600">{text}</p>
             {/* <RenderReferences references={references} /> */}
+            <FounderCard founder={founderData} />
         </div>
     );
 }
