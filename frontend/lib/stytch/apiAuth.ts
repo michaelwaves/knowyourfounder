@@ -1,5 +1,5 @@
 import { jwtVerify, createRemoteJWKSet } from "jose";
-import { stytchClient } from "@/utils/stytchClient";
+import { stytchClient } from "./stytchClient";
 
 // URL for your project's JSON Web Key Set (JWKS), used to verify JWT tokens
 const JWKS_URL = "https://login.stytchb2bdemo.com/.well-known/jwks.json";

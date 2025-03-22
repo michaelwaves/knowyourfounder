@@ -1,9 +1,11 @@
+"use client"
+
 import { Button } from "@/components/ui/button";
-import { useStytch } from "@stytch/nextjs";
+import { useStytchB2BClient } from "@stytch/nextjs/b2b";
 import { LogOut } from "lucide-react";
 
 function LogoutButton() {
-    const stytch = useStytch();
+    const stytch = useStytchB2BClient();
     return (
         <Button className="w-fit cursor-pointer"
             onClick={

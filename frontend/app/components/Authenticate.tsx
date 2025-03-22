@@ -5,7 +5,7 @@ import { useRouter, useSearchParams } from 'next/navigation';
 import { StytchB2B } from '@stytch/nextjs/b2b';
 import { discoveryConfig } from '@/lib/stytch/stytchConfig';
 
-export const Authenticate = () => {
+const Authenticate = () => {
     const { session } = useStytchMemberSession();
     const router = useRouter();
     const searchParams = useSearchParams(); // Handle query parameters
@@ -26,7 +26,7 @@ export const Authenticate = () => {
     }
 
     const fullRedirectURL = `${window.location.origin}/authenticate?${redirectParams.toString()}`;
-
+    console.log(fullRedirectURL)
     const configWithRedirect = {
         ...discoveryConfig,
         emailMagicLinksOptions: {
@@ -39,8 +39,10 @@ export const Authenticate = () => {
     };
 
     return (
-        <div className="centered-login">
+        <div className="flex w-full h-full items-center justify-center">
             <StytchB2B config={configWithRedirect} />
         </div>
     );
 };
+
+export default Authenticate

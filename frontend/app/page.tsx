@@ -1,9 +1,9 @@
 'use client';
 
-import Login from '@/app/components/Login';
 import { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { useStytchMember } from '@stytch/nextjs/b2b';
+import Authenticate from './components/Authenticate';
 
 export default function AuthenticatePage() {
   const { member, isInitialized } = useStytchMember();
@@ -16,5 +16,5 @@ export default function AuthenticatePage() {
     }
   }, [member, isInitialized, router]);
 
-  return <Login />;
+  return <Authenticate />;
 }
