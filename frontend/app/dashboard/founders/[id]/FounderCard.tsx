@@ -83,15 +83,15 @@ const FounderCard: React.FC<FounderCardProps> = ({ founder }) => {
                     <span className="font-medium">Address:</span> {founder.address}
                 </p>
             </div>
-
-            {/* Company Information */}
+            {/* 
+            
             <div className="space-y-2">
                 <h3 className="text-lg font-semibold border-b pb-1">Company Information</h3>
                 <p>
                     <span className="font-medium">Company:</span> {founder.company_name}
                 </p>
             </div>
-
+ */}
             {/* Compliance & Risk */}
             <div className="space-y-2">
                 <h3 className="text-lg font-semibold border-b pb-1">Compliance & Risk</h3>
@@ -113,7 +113,7 @@ const FounderCard: React.FC<FounderCardProps> = ({ founder }) => {
             </div>
 
             {/* Platform Information */}
-            <div className="space-y-2">
+            {/*  <div className="space-y-2">
                 <h3 className="text-lg font-semibold border-b pb-1">Platform Info</h3>
                 <p>
                     <span className="font-medium">Tavus URL:</span> {founder.tavus_url}
@@ -124,7 +124,7 @@ const FounderCard: React.FC<FounderCardProps> = ({ founder }) => {
                 <p>
                     <span className="font-medium">Conversation ID:</span> {founder.tavus_conversation_id}
                 </p>
-            </div>
+            </div> */}
 
             {/* System Details */}
             <div className="space-y-2">
