@@ -13,7 +13,7 @@ export async function createConversation() {
         callback_url: "https://kyc.info/webhook",
         conversation_name: "A Reference for a Founder",
         conversational_context: `
-        Keep response short and snappy. You are interviewing John. 
+        Keep response short and snappy. You are interviewing Michael. 
         This is a reference check for Alex. Ask him: Did you work with Alex Chan at Shopify? 
         What was your experience with him, specifically his strengths, growth areas, work style, 
         and any challenges? Were there any key behaviors or decision-making traits that stood out? 
